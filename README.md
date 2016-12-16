@@ -1,5 +1,16 @@
 # <img src="https://cloud.githubusercontent.com/assets/7833470/10423298/ea833a68-7079-11e5-84f8-0a925ab96893.png" width="60"> Personal API - Weekend Lab
 
+## API Endpoints:
+  {method: "GET", path: "/api", description: "Describes all available endpoints"}
+  {method: "GET", path: "/api/profile", description: "Profile"},
+  {method: "GET", path: "/api/projects", description: "Project List"}
+  {method: "POST", path: "/api/projects", description: "Project Addition"}
+  {method: "GET", path: "/api/pets", description: "My Pets"}
+  {method: "GET", path: "/api/pets", description: "My Pets"}
+  {method: "GET", path: "/api/pets", description: "My Pets"}
+
+
+
 It's time to have some fun and play with the technologies you've learned in the past week. Your goal is to build a API about yourself. Your API will incorporate:
 * Well-documented **JSON API** Endpoints
 * A full set of **REST-ful Routes** (GET, POST, UPDATE, DELETE)
