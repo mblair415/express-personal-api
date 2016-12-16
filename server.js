@@ -54,12 +54,28 @@ app.get('/api', function api_index(req, res) {
       {method: "GET", path: "/api/profile", description: "Profile"},
       {method: "GET", path: "/api/projects", description: "Project List"},
       {method: "POST", path: "/api/projects", description: "Project Addition"},
-      {method: "GET", path: "/api/pets", description: "My Pets"},
-      {method: "GET", path: "/api/pets", description: "My Pets"},
-      {method: "GET", path: "/api/pets", description: "My Pets"}
+      {method: "DELETE", path: "/api/projects", description: "Delete Existing Project"},
+      {method: "GET", path: "/api/networking", description: "Networking Event"},
+      {method: "POST", path: "/api/networking", description: "Networking Event Addition"},
+      {method: "DELETE", path: "/api/projects", description: "Delete Existing Project"}
     ]
   })
 });
+
+/**********
+ * PROFILE *
+ **********/
+ var ProfileSchema = new Schema({
+   name: 'Michael Blair';
+ });
+
+ var ProfileSchema = new Schema({
+      name: 'Michael Blair',
+      gitHubUserName: 'mblair415',
+      gitHubProfileImage: url:'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
+      pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
+ });
+
 
 /**********
  * SERVER *
