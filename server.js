@@ -31,10 +31,30 @@ app.use(function(req, res, next) {
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
+// get all projects
 app.get('/api/project', function (req, res) {
   // send all projects as JSON response
   res.json({});
 });
+
+// get one project.
+app.get('/api/project/:id', function (req, res) {
+  // send all projects as JSON response
+  res.json({});
+});
+
+// change one project
+app.post('/api/project/:id', function (req, res) {
+  // send all projects as JSON response
+  res.json({});
+});
+
+// delete one project
+app.get('/api/project/:id', function (req, res) {
+  // send all projects as JSON response
+  res.json({});
+});
+
 
 /*
  * HTML Endpoints
@@ -71,8 +91,8 @@ app.get('/api/profile', function api_profile(req, res) { // physically moved fro
   res.json({
     name: 'Michael Blair',
     currentCity: 'San Rafael',
-    gitHubUserName: 'mblair415',
-    gitHubLink: 'https://github.com/mblair415',
+    githubUsername: 'mblair415',
+    githubLink: 'https://github.com/mblair415',
     gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
     pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
   })
