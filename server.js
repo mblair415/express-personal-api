@@ -37,6 +37,16 @@ app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
 
+app.get('/api/profile', function api_profile(req, res) { // physically moved from below endpoints.
+  res.json({
+    name: 'Michael Blair',
+    gitHubUserName: 'mblair415',
+    gitHubLink: 'https://github.com/mblair415',
+    gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
+    pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
+  })
+});
+
 
 /*
  * JSON API Endpoints
@@ -52,7 +62,8 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Profile"},
-      {method: "GET", path: "/api/projects", description: "Project List"},
+      {method: "GET", path: "/api/projects", description: "Full Project List"},
+      {method: "GET", path: "/api/projects/:id", description: "One Project"},
       {method: "POST", path: "/api/projects", description: "Project Addition"},
       {method: "DELETE", path: "/api/projects", description: "Delete Existing Project"},
       {method: "GET", path: "/api/networking", description: "Networking Event"},
@@ -62,14 +73,7 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-app.get('/api/profile', function api_profile(req, res) {
-  res.json({
-    name: 'Michael Blair',
-    gitHubUserName: 'mblair415',
-    gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
-    pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
-  })
-});
+
 
 
 /**********
