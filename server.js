@@ -62,19 +62,14 @@ app.get('/api', function api_index(req, res) {
   })
 });
 
-/**********
- * PROFILE *
- **********/
- var ProfileSchema = new Schema({
-   name: 'Michael Blair';
- });
-
- var ProfileSchema = new Schema({
-      name: 'Michael Blair',
-      gitHubUserName: 'mblair415',
-      gitHubProfileImage: url:'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
-      pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
- });
+app.get('/api/profile', function api_profile(req, res) {
+  res.json({
+    name: 'Michael Blair',
+    gitHubUserName: 'mblair415',
+    gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
+    pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
+  })
+});
 
 
 /**********
