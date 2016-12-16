@@ -1,5 +1,5 @@
 var mongoose = require('mongoose'),
-  // Schema = mongoose.Schema;
+  Schema = mongoose.Schema;
   // Author = require('./author');
 
 // models/book.js
@@ -11,5 +11,5 @@ var ProjectSchema = new Schema({
 });
 
 
-var Project = mongoose.model('Project', ProjetSchema);
+var Project = mongoose.model('Project', ProjectSchema);
 module.exports = Project;

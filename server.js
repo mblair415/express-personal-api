@@ -7,6 +7,8 @@ var express = require('express'),
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
+var db = require('./models');
+
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
 app.use(function(req, res, next) {
@@ -29,23 +31,16 @@ app.use(function(req, res, next) {
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
+app.get('/api/project', function (req, res) {
+  // send all projects as JSON response
+  res.json({});
+});
+
 /*
  * HTML Endpoints
  */
 
-app.get('/', function homepage(req, res) {
-  res.sendFile(__dirname + '/views/index.html');
-});
 
-app.get('/api/profile', function api_profile(req, res) { // physically moved from below endpoints.
-  res.json({
-    name: 'Michael Blair',
-    gitHubUserName: 'mblair415',
-    gitHubLink: 'https://github.com/mblair415',
-    gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
-    pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
-  })
-});
 
 
 /*
@@ -62,17 +57,29 @@ app.get('/api', function api_index(req, res) {
     endpoints: [
       {method: "GET", path: "/api", description: "Describes all available endpoints"},
       {method: "GET", path: "/api/profile", description: "Profile"},
-      {method: "GET", path: "/api/projects", description: "Full Project List"},
-      {method: "GET", path: "/api/projects/:id", description: "One Project"},
-      {method: "POST", path: "/api/projects", description: "Project Addition"},
-      {method: "DELETE", path: "/api/projects", description: "Delete Existing Project"},
+      {method: "GET", path: "/api/project", description: "Full Project List"},
+      {method: "GET", path: "/api/project/:id", description: "One Project"},
+      {method: "POST", path: "/api/project", description: "Project Addition"},
+      {method: "DELETE", path: "/api/project", description: "Delete Existing Project"},
       {method: "GET", path: "/api/networking", description: "Networking Event"},
       {method: "POST", path: "/api/networking", description: "Networking Event Addition"},
-      {method: "DELETE", path: "/api/projects", description: "Delete Existing Project"}
+      {method: "DELETE", path: "/api/project", description: "Delete Existing Project"}
     ]
   })
 });
-
+app.get('/api/profile', function api_profile(req, res) { // physically moved from below endpoints.
+  res.json({
+    name: 'Michael Blair',
+    currentCity: 'San Rafael',
+    gitHubUserName: 'mblair415',
+    gitHubLink: 'https://github.com/mblair415',
+    gitHubProfileImage: 'https://avatars1.githubusercontent.com/u/21349195?v=3&u=8c3f919e94607f8649b7f7e9ea2e5487c5daf97b&s=400',
+    pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
+  })
+});
+app.get('/', function homepage(req, res) {
+  res.sendFile(__dirname + '/views/index.html');
+});
 
 
 
