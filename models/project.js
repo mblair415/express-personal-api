@@ -5,7 +5,7 @@ var mongoose = require('mongoose'),
 // models/book.js
 var ProjectSchema = new Schema({
      title: String,
-     screenShot: String,
+     image: String,
      dateAssigned: String,
      teamMembers: String
 });

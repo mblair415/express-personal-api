@@ -32,16 +32,32 @@ app.use(function(req, res, next) {
 app.use(express.static('public'));
 
 // get all projects
+// app.get('/api/project', function (req, res) {
+//   // send all projects as JSON response
+//   res.json({});
+// });
+
+
+// get all proejcts
 app.get('/api/project', function (req, res) {
   // send all projects as JSON response
-  res.json({});
+
+  db.Project.find({},function(err, project){
+    if (err) { return console.log("index error: " + err); }
+    // console.log(project);
+    res.json(project);
+  });
 });
 
 // get one project.
 app.get('/api/project/:id', function (req, res) {
+  db.Project.findOne({_id: req.params._id }, function(err, data) {
+    res.json(data);
+  })
   // send all projects as JSON response
   res.json({});
 });
+
 
 // change one project
 app.post('/api/project/:id', function (req, res) {
