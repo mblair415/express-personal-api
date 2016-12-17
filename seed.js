@@ -16,7 +16,7 @@ var db = require('./models');
 
 var projectList = [{
   title: 'the cure for cancer',
-  image: 'https://www.flickr.com/photos/jm/38538',
+  image: 'https://s-media-cache-ak0.pinimg.com/originals/7a/f2/1e/7af21e8e9f4c1f7ce137d9e20b43cef1.jpg',
   dateAssigned: Date.now(),
   teamMembers: 'None, solo project.'
   },
