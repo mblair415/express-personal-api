@@ -1,13 +1,23 @@
 var mongoose = require('mongoose'),
   Schema = mongoose.Schema;
-  // Author = require('./author');
 
-// models/book.js
 var ProjectSchema = new Schema({
      title: String,
      image: String,
      dateAssigned: String,
-     teamMembers: String
+     teamMembers: {
+       type: String,
+       default: 'Solo project'
+     },
+     githubLink: String,
+     hostedSiteLink: {
+       type: String,
+       default: 'Not hosted'
+     },
+     updated: {
+       type: Date,
+       default: Date.now
+     }
 });
 
 

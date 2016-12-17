@@ -7,7 +7,6 @@ var express = require('express'),
 var bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var db = require('./models');
 
 // allow cross origin requests (optional)
 // https://developer.mozilla.org/en-US/docs/Web/HTTP/Access_control_CORS
@@ -21,7 +20,7 @@ app.use(function(req, res, next) {
  * DATABASE *
  ************/
 
-// var db = require('./models');
+var db = require('./models');
 
 /**********
  * ROUTES *
@@ -31,21 +30,24 @@ app.use(function(req, res, next) {
 // i.e. `/images`, `/scripts`, `/styles`
 app.use(express.static('public'));
 
-// get all projects
-// app.get('/api/project', function (req, res) {
-//   // send all projects as JSON response
-//   res.json({});
-// });
 
 
-// get all proejcts
+// - 'POST/api/project'        Create a  new project
+// - 'GET/project/1'           Display a specific project
+// - 'GET/project/1/edit'      Edit a project
+// - 'PUT/project/1'           Update a specific project
+// - 'DELETE/project/1'        Delete a specific project
+
+
+// - 'GET/api/project'         Display a list of all projects
 app.get('/api/project', function (req, res) {
   // send all projects as JSON response
-
-  db.Project.find({},function(err, project){
-    if (err) { return console.log("index error: " + err); }
-    // console.log(project);
-    res.json(project);
+  db.Project.find({}, function(err, project){
+    if (err) {
+      return res.status(500).send('server error');
+    } else {
+      res.json(project);
+    }
   });
 });
 
