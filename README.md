@@ -39,8 +39,13 @@ GET/profile          description of personal profile
     - gitHub link
     - hosted site link
 - 'GET/project/1'           Display a specific project
-- 'GET/project/1/edit'      Edit a project
-- 'PUT/project/1'           Update a specific project
+- 'PUT/project/1/edit'      Edit a project
+  - request body should include:
+    - title
+    - date assigned
+    - team members
+    - gitHub link
+    - hosted site link
 - 'DELETE/project/1'        Delete a specific project
 
 1. Reference vs Embedded?

@@ -33,9 +33,6 @@ app.use(express.static('public'));
 
 
 // - 'POST/api/project'        Create a  new project
-// - 'GET/project/1'           Display a specific project
-// - 'GET/project/1/edit'      Edit a project
-// - 'PUT/project/1'           Update a specific project
 // - 'DELETE/project/1'        Delete a specific project
 
 
@@ -51,61 +48,30 @@ app.get('/api/project', function (req, res) {
   });
 });
 
-// get one project.
+// - 'GET/project/1'           Display a specific project
 app.get('/api/project/:id', function (req, res) {
-  db.Project.findOne({ _id: req.params.id }), function(err, foundProject) {
+  db.Project.findOne({ _id: req.params.id }, function(err, foundProject) {
     if (err) {
       res.status(500).send('error: ', err);
     } else {
-      // res.send('response working');
       res.json(foundProject);
     }
-  }
-})
-// app.get('/api/project/:id', function (req, res) {
-//   db.Project.findOne({_id: req.params._id }, function(err, data) {
-//     res.json(data);
-//   })
-//   // send all projects as JSON response
-//   res.json({});
-// });
-
-
-// change one project -- not running.
-app.post('/api/project/:id', function (req, res) {
-  // send all projects as JSON response
-  var projectInfo = {
-    projectTitle: req.body.title,
-    projectDate: req.body.date,
-    projectTeamMembers: req.body.teamMembers,
-    projectGithubLink: req.body.githubLink,
-    projectHostedSiteLink: req.body.hostedSiteLink
-  }
-  var newProject = new db.Project(projectInfo);
-  newProject.save(function(err, project) {
-    if (err){
-      res.status(500).send('database error');
-      return console.log('error', err);
-    } else {
-      res.json(project);
-    }
   })
-});
+})
 
-// update one project
-app.patch('api/project/:id', function (req, res) {
-  db.Project.findOne({ _id: req.params.id }), function(err, foundProject) {
+// - 'PATCH/project/1'           Update a specific project
+app.patch('/api/project/:id', function (req, res) {
+  db.Project.findOne({ _id: req.params.id }, function(err, foundProject) {
     if (err) {
       res.status(500).send('error: ', err);
     } else {
-      foundProjectTitle = request.body.title || foundProjectTitle;
-      if (request.body.date) {
-        foundProjectDate = request.body.date || foundProjectDate;
+      foundProject.title = req.body.title || foundProject.title;
+      if (req.body.date) {
+        foundProject.date = req.body.date || foundProject.date;
       }
-      foundProjectTeamMembers = request.body.teamMembers || foundProjectTeamMembers;
-      foundProjectGithubLink = request.body.githubLink || foundProjectGithubLink;
-      foundProjectHostedSiteLink = request.body.hostedSiteLink || foundProjectHostedSiteLink;
-
+      foundProject.teamMembers = req.body.teamMembers || foundProject.teamMembers;
+      foundProject.githubLink = req.body.githubLink || foundProject.githubLink;
+      foundProject.hostedSiteLink = req.body.hostedSiteLink || foundProject.hostedSiteLink;
       foundProject.save(function(err, savedProject) {
         if (err) {
           res.status(500).send('database error');
@@ -113,13 +79,21 @@ app.patch('api/project/:id', function (req, res) {
           res.json(foundProject);
         }
       })
-
     }
-  }
+  })
 })
 
 
-// delete one project
+// - 'DELETE/project/1'        Delete a specific project
+app.delete('/api/project/:id', function (req, res) {
+  db.Project.findOneAndRemove({ _id: req.params.id }, function(err, foundProject) {
+    if (err) {
+      res.status(500).send('error: ', err);
+    } else {
+      res.json(foundProject);
+    }
+  })
+})
 
 
 
