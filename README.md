@@ -31,7 +31,13 @@ GET/profile          description of personal profile
 
 ### RESTful routes for projects
 - 'GET/api/project'         Display a list of all projects
-- 'POST/api/project'        Create a  new project
+- 'POST/api/project'        Create a new project
+  - request body should include:
+    - title
+    - date assigned
+    - team members
+    - gitHub link
+    - hosted site link
 - 'GET/project/1'           Display a specific project
 - 'GET/project/1/edit'      Edit a project
 - 'PUT/project/1'           Update a specific project

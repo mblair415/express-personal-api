@@ -53,25 +53,74 @@ app.get('/api/project', function (req, res) {
 
 // get one project.
 app.get('/api/project/:id', function (req, res) {
-  db.Project.findOne({_id: req.params._id }, function(err, data) {
-    res.json(data);
-  })
-  // send all projects as JSON response
-  res.json({});
-});
+  db.Project.findOne({ _id: req.params.id }), function(err, foundProject) {
+    if (err) {
+      res.status(500).send('error: ', err);
+    } else {
+      // res.send('response working');
+      res.json(foundProject);
+    }
+  }
+})
+// app.get('/api/project/:id', function (req, res) {
+//   db.Project.findOne({_id: req.params._id }, function(err, data) {
+//     res.json(data);
+//   })
+//   // send all projects as JSON response
+//   res.json({});
+// });
 
 
-// change one project
+// change one project -- not running.
 app.post('/api/project/:id', function (req, res) {
   // send all projects as JSON response
-  res.json({});
+  var projectInfo = {
+    projectTitle: req.body.title,
+    projectDate: req.body.date,
+    projectTeamMembers: req.body.teamMembers,
+    projectGithubLink: req.body.githubLink,
+    projectHostedSiteLink: req.body.hostedSiteLink
+  }
+  var newProject = new db.Project(projectInfo);
+  newProject.save(function(err, project) {
+    if (err){
+      res.status(500).send('database error');
+      return console.log('error', err);
+    } else {
+      res.json(project);
+    }
+  })
 });
 
+// update one project
+app.patch('api/project/:id', function (req, res) {
+  db.Project.findOne({ _id: req.params.id }), function(err, foundProject) {
+    if (err) {
+      res.status(500).send('error: ', err);
+    } else {
+      foundProjectTitle = request.body.title || foundProjectTitle;
+      if (request.body.date) {
+        foundProjectDate = request.body.date || foundProjectDate;
+      }
+      foundProjectTeamMembers = request.body.teamMembers || foundProjectTeamMembers;
+      foundProjectGithubLink = request.body.githubLink || foundProjectGithubLink;
+      foundProjectHostedSiteLink = request.body.hostedSiteLink || foundProjectHostedSiteLink;
+
+      foundProject.save(function(err, savedProject) {
+        if (err) {
+          res.status(500).send('database error');
+        } else {
+          res.json(foundProject);
+        }
+      })
+
+    }
+  }
+})
+
+
 // delete one project
-app.get('/api/project/:id', function (req, res) {
-  // send all projects as JSON response
-  res.json({});
-});
+
 
 
 /*
@@ -105,6 +154,7 @@ app.get('/api', function api_index(req, res) {
     ]
   })
 });
+
 app.get('/api/profile', function api_profile(req, res) { // physically moved from below endpoints.
   res.json({
     name: 'Michael Blair',
@@ -115,6 +165,7 @@ app.get('/api/profile', function api_profile(req, res) { // physically moved fro
     pets: [{name: 'Zelda', breed: 'Pittbull mix', age: 2}, {name: 'Megabyte', breed: 'Beagle mix', age: 3}]
   })
 });
+
 app.get('/', function homepage(req, res) {
   res.sendFile(__dirname + '/views/index.html');
 });
