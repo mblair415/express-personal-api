@@ -1,8 +1,7 @@
 # <img src="https://cloud.githubusercontent.com/assets/7833470/10423298/ea833a68-7079-11e5-84f8-0a925ab96893.png" width="60"> Personal API - Weekend Lab
 
-A JSON API for data about me and my projects!
-
-One to many relationship
+Take your standards and LOWER them.
+Now, if you've done that enough, prepare to have your mind BLOWN!
 
 ## data
 

@@ -13,6 +13,12 @@ h1 {
   height: 200px;
 }
 
-#main-image {
-  
+.projects-title {
+  text-align: center;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+* {
+  border: dashed 1px black;
 }

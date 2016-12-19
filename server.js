@@ -32,10 +32,6 @@ app.use(express.static('public'));
 
 
 
-// - 'POST/api/project'        Create a  new project
-// - 'DELETE/project/1'        Delete a specific project
-
-
 // - 'GET/api/project'         Display a list of all projects
 app.get('/api/project', function (req, res) {
   // send all projects as JSON response
@@ -61,6 +57,30 @@ app.get('/api/project/:id', function (req, res) {
 
 // - 'PATCH/project/1'           Update a specific project
 app.patch('/api/project/:id', function (req, res) {
+  db.Project.findOne({ _id: req.params.id }, function(err, foundProject) {
+    if (err) {
+      res.status(500).send('error: ', err);
+    } else {
+      foundProject.title = req.body.title || foundProject.title;
+      if (req.body.date) {
+        foundProject.date = req.body.date || foundProject.date;
+      }
+      foundProject.teamMembers = req.body.teamMembers || foundProject.teamMembers;
+      foundProject.githubLink = req.body.githubLink || foundProject.githubLink;
+      foundProject.hostedSiteLink = req.body.hostedSiteLink || foundProject.hostedSiteLink;
+      foundProject.save(function(err, savedProject) {
+        if (err) {
+          res.status(500).send('database error');
+        } else {
+          res.json(foundProject);
+        }
+      })
+    }
+  })
+})
+
+// - 'POST/api/project'        Create a  new project
+app.post('/api/project/:id', function (req, res) {
   db.Project.findOne({ _id: req.params.id }, function(err, foundProject) {
     if (err) {
       res.status(500).send('error: ', err);
